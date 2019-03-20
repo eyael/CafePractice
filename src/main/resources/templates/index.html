@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,79 @@
 <body>
 <h2>Insecure page</h2>
 <a href="/secure">Secure page</a>
+<style>
+    body{
+        background-size: cover;
+        background-color: lightpink;
+    }
+</style>
+<div class="container p-5">
+
+    <div class="space"></div>
+
+    <div class="bg-light bg-background">
+        <h1 class="text-center title-heading p-3">Welcome our Cafe</h1>
+        <h6 class="text-center text-secondary">Hours: 9am to 5 pm daily.</h6>
+    </div>
+
+    <div class="col-md-12 col-md-offset-4 table-background table-hover">
+        <table class="table">
+            <thead class="thead-background">
+
+            <tr>
+                <th>Menu Item</th>
+                <th>price</th>
+                <th>description</th>
+                <th>picture</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cafe : ${cafe}">
+
+                <td th:text="${cafe.menuitem}"></td>
+                <td th:text="${cafe.price}"></td>
+                <td th:text="${cafe.description}"></td>
+                <td><div  th:if="${cafe.picture} != null">
+                    <img th:src="${cafe.picture}" />
+
+                </div>
+                </td>
+
+                <td>
+                    <a th:href="@{/update/{id}(id=${cafe.id})}">Update</a> -
+                    <a th:href="@{/detail/{id}(id=${cafe.id})}">Details</a> -
+                    <a th:href="@{/delete/{id}(id=${cafe.id})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <hr/>
+        <br/>
+        <div class="container" align="center">
+            <iframe src="https://res.cloudinary.com/dtvwgqowk/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1552080177/employee-satisfaction.jpg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+
+        <div class="space"></div>
+        <h2 class="text-center">Thank You</h2><br/>
+        <br/><br/>
+
+
+        <div class="emptySpace"></div>
+    </div>
+
+</div> <!--- End container -->
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    Administrators will see this text. You can display a navbar here.
+</div>
+
+<div sec:authorize="hasAuthority('USER')">
+    Users will see this text. You can display a navbar here.
+</div>
+</body>
+</html>
 </body>
 </html>

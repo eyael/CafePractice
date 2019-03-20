@@ -20,6 +20,8 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
+
+
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
         model.addAttribute("user", new User());
@@ -41,12 +43,18 @@ public class HomeController {
         return "index";
     }
     @RequestMapping("/")
-    public String index(){
+    public String index(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("cafe", new Cafe());
+
         return "index";
     }
+
     @RequestMapping("/login")
     public String login(){
         return "login";
+
+
     }
     @RequestMapping("/secure")
     public String secure(Principal principal, Model model){
