@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:>
 <head th:fragment="head-source">
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <style>
-        body{
-            background-size: cover;
-            background-color: lightpink;
-        }
-    </style>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -20,11 +15,16 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" href="/css/style.css" />
-
+    <style>
+        body{
+            background-size: cover;
+            background-color: #DDA0DD;
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar navbar-expand-lg navbar-light nav-background" th:fragment="main-navbar">
+<nav class="navbar navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="main-navbar">
     <a class="navbar-brand text-light" href="/">
        Cafe Menu
     </a>
@@ -42,6 +42,12 @@
             </li>
             <li class="nav-item text-light">
                 <a class="nav-link text-light" href="/add">Add Menu</a>
+            </li>
+            <li class="nav-item text-light" sec:authorize="!isAuthenticated()">
+                <a class="nav-link text-light" href="/login">login</a>
+            </li>
+            <li class="nav-item text-light" sec:authorize="isAuthenticated()">
+                <a class="nav-link text-light" href="/logout">Logout</a>
             </li>
             <!--<li class="nav-item text-light">-->
             <!--<a class="nav-link text-info" href="/login">Login</a>-->
